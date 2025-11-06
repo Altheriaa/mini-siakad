@@ -14,7 +14,7 @@ class JadwalKkn extends Model
         'tahun_akademik_id',
         'tanggal_dibuka',
         'tanggal_ditutup',
-        'keterangan',
+        'jenis_kkn_id',
     ];
 
     public function prodi()
@@ -26,6 +26,11 @@ class JadwalKkn extends Model
     {
         return $this->belongsTo(TahunAkademik::class, 'tahun_akademik_id');
     }
+
+    // public function jenisKkn()
+    // {
+    //     return $this->belongsTo(JenisKkn::class, 'jenis_kkn_id');
+    // }
 
     // jika kolom bertipe datetime/date
     protected $dates = ['tanggal_dibuka', 'tanggal_ditutup'];
