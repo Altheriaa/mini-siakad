@@ -22,13 +22,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // syarat kkn 
     Route::post('/kkn/syarat', [KknController::class, 'validasiSyarat']);
-    Route::get('/kkn/jenis', [KknController::class, 'getJenisKkn']);
 });
 
 Route::middleware('check.system.key')->group(function () {
     Route::get('/mahasiswa/admin', [MahasiswaController::class, 'allFromSystem']);
     Route::get('/mahasiswa/admin/{id}', [MahasiswaController::class, 'show']);
-    // Route::get('/kkn/syarat/admin', [KknController::class, 'validasiSyaratAdmin']);
+    Route::get('/kkn/jenis', [KknController::class, 'getJenisKkn']);
+    Route::get('/kkn/syarat/admin', [KknController::class, 'validasiSyaratAdmin']);
+    Route::get('/jadwal-kkn', [KknController::class, 'getJadwalKkn']);
 });
 
 // Route::get('/check-key', function () {

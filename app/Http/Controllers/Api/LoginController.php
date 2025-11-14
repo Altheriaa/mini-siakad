@@ -31,6 +31,8 @@ class LoginController extends Controller
 
         // cek yang login mahasiswa ato bukan
         $user = Auth::user();
+        $user->load('mahasiswa.prodi');
+        $user->load('mahasiswa');
         // cuma kasi izin mahasiswa
         if ($user->role !== 'mahasiswa') {
             return response()->json([
@@ -50,6 +52,16 @@ class LoginController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'role' => $user->role,
+                'prodi' => [
+                    'nama_prodi' => $user->mahasiswa->prodi->nama_prodi ?? 'N/A'
+                    // tambahkan data lain jika perlu
+                ],
+                'mahasiswa' => [
+                    'jumlah_sks' => $user->mahasiswa->jumlah_sks ?? 'N/A',
+                    'jenis_kelamin' => $user->mahasiswa->jenis_kelamin ?? 'N/A'
+                    // tambahkan data lain jika perlu
+                ],
+
             ],
             'token' => $token
         ], 200);

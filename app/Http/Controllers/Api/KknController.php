@@ -144,4 +144,18 @@ class KknController extends Controller
             'data' => $mahasiswaEligible
         ], 200);
     }
+
+    public function getJadwalKkn(Request $request)
+    {
+
+        $jadwalKkn = JadwalKkn::with('prodi', 'tahunAkademik')
+            ->whereDate('tanggal_dibuka', '<=', now())
+            ->whereDate('tanggal_ditutup', '>=', now())
+            ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $jadwalKkn
+        ], 200);
+    }
 }
