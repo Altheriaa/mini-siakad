@@ -5,7 +5,7 @@
     <div class="min-h-screen flex items-center justify-center py-12 px-4">
         <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
             <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center">Login</h2>
-            <p class="text-gray-600 text-center mb-8">Masuk ke Sistem Mini Siakad</p>
+            <p class="text-gray-600 text-center mb-8">Masuk ke Sistem Mini Siakad Coy</p>
 
             <form class="space-y-5" action="{{ route('login.post') }}" method="POST">
                 <!-- CSRF Token -->
