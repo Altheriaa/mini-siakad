@@ -14,7 +14,7 @@ class KknController extends Controller
     public function getJenisKkn()
     {
 
-        $jenisKkn = JenisKkn::where('is_active', true)->select('id', 'nama_jenis', 'biaya')->get();
+        $jenisKkn = JenisKkn::where('is_active', true)->select('id', 'nama_jenis', 'biaya', 'is_active')->get();
 
         return response()->json([
             'status' => 'success',
@@ -102,8 +102,7 @@ class KknController extends Controller
             'data' => [
                 'jadwal_kkn_id' => $jadwalKkn->id,
                 'jenis_kkn' => $jenisKkn->nama_jenis,
-                'biaya' => $jenisKkn->biaya,
-                'is_active' => $jenisKkn->is_active // <-- PENTING: Kirim biayanya
+                'biaya' => $jenisKkn->biaya
             ]
         ], 200);
     }
