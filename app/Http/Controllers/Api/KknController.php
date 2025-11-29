@@ -14,7 +14,7 @@ class KknController extends Controller
     public function getJenisKkn()
     {
 
-        $jenisKkn = JenisKkn::where('is_active', true)->select('id', 'nama_jenis', 'biaya', 'is_active')->get();
+        $jenisKkn = JenisKkn::select('id', 'nama_jenis', 'biaya', 'is_active')->get();
 
         return response()->json([
             'status' => 'success',
