@@ -102,7 +102,8 @@ class KknController extends Controller
             'data' => [
                 'jadwal_kkn_id' => $jadwalKkn->id,
                 'jenis_kkn' => $jenisKkn->nama_jenis,
-                'biaya' => $jenisKkn->biaya // <-- PENTING: Kirim biayanya
+                'biaya' => $jenisKkn->biaya,
+                'is_active' => $jenisKkn->is_active // <-- PENTING: Kirim biayanya
             ]
         ], 200);
     }
