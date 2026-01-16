@@ -54,12 +54,10 @@ class LoginController extends Controller
                 'role' => $user->role,
                 'prodi' => [
                     'nama_prodi' => $user->mahasiswa->prodi->nama_prodi ?? 'N/A'
-                    // tambahkan data lain jika perlu
                 ],
                 'mahasiswa' => [
                     'jumlah_sks' => $user->mahasiswa->jumlah_sks ?? 'N/A',
                     'jenis_kelamin' => $user->mahasiswa->jenis_kelamin ?? 'N/A'
-                    // tambahkan data lain jika perlu
                 ],
 
             ],
