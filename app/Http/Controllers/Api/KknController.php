@@ -57,10 +57,15 @@ class KknController extends Controller
             ], 422);
         }
 
-        // Mencari jadwal kkn yang sesuai
-        $jadwalKkn = jadwalKkn::where('prodi_id', $mahasiswa->prodi_id)
-            ->where('tahun_akademik_id', $tahunAktif->id)
-            // ->where('status_pendaftaran', true)
+        // Mencari jadwal kkn yang sesuai dengan prodi
+        // $jadwalKkn = jadwalKkn::where('prodi_id', $mahasiswa->prodi_id)
+        //     ->where('tahun_akademik_id', $tahunAktif->id)
+        //     ->whereDate('tanggal_dibuka', '<=', now()) // Pendaftaran sudah dimulai
+        //     ->whereDate('tanggal_ditutup', '>=', now()) // Pendaftaran belum ditutup
+        //     ->first();
+
+        // Mencari jadwal kkn yang sesuai tanpa prodi
+        $jadwalKkn = jadwalKkn::where('tahun_akademik_id', $tahunAktif->id)
             ->whereDate('tanggal_dibuka', '<=', now()) // Pendaftaran sudah dimulai
             ->whereDate('tanggal_ditutup', '>=', now()) // Pendaftaran belum ditutup
             ->first();
