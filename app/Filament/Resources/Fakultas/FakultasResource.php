@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\Prodis;
+namespace App\Filament\Resources\Fakultas;
 
-use App\Filament\Resources\Prodis\Pages\ManageProdis;
-use App\Models\Prodi;
+use App\Filament\Resources\Fakultas\Pages\ManageFakultas;
+use App\Models\Fakultas;
 use BackedEnum;
 use UnitEnum;
 use Filament\Actions\BulkActionGroup;
@@ -15,42 +15,26 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\Select;
 use Filament\Tables\Table;
 
-use function Laravel\Prompts\select;
-
-class ProdiResource extends Resource
+class FakultasResource extends Resource
 {
-    protected static ?string $model = Prodi::class;
+    protected static ?string $model = Fakultas::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'nama_prodi';
+    protected static ?string $recordTitleAttribute = 'kode_fakultas';
 
     protected static string | UnitEnum | null $navigationGroup = 'Akademik';
-
-    public static function getPluralLabel(): string
-    {
-        return 'Program Studi';
-    }
-
-    public static function getLabel(): string
-    {
-        return 'Program Studi';
-    }
 
     public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Select::make('fakultas_id')
-                    ->relationship('fakultas', 'nama_fakultas')
-                    ->required(),
-                TextInput::make('kode_prodi')
+                TextInput::make('kode_fakultas')
                     ->unique()
                     ->required(),
-                TextInput::make('nama_prodi')
+                TextInput::make('nama_fakultas')
                     ->unique()
                     ->required(),
             ]);
@@ -59,13 +43,11 @@ class ProdiResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('nama_prodi')
+            ->recordTitleAttribute('kode_fakultas')
             ->columns([
-                TextColumn::make('fakultas.nama_fakultas')
+                TextColumn::make('kode_fakultas')
                     ->searchable(),
-                TextColumn::make('kode_prodi')
-                    ->searchable(),
-                TextColumn::make('nama_prodi')
+                TextColumn::make('nama_fakultas')
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -93,7 +75,7 @@ class ProdiResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ManageProdis::route('/'),
+            'index' => ManageFakultas::route('/'),
         ];
     }
 }

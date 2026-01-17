@@ -9,6 +9,7 @@ class Prodi extends Model
     protected $table = 'prodi';
 
     protected $fillable = [
+        'fakultas_id',
         'kode_prodi',
         'nama_prodi',
     ];
@@ -18,8 +19,8 @@ class Prodi extends Model
         return $this->hasMany(Mahasiswa::class, 'prodi_id');
     }
 
-    public function jadwalKkns()
+    public function fakultas()
     {
-        return $this->hasMany(JadwalKkn::class, 'prodi_id');
+        return $this->belongsTo(Fakultas::class, 'fakultas_id');
     }
 }

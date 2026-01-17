@@ -44,25 +44,17 @@ class JadwalKknResource extends Resource
     {
         return $schema
             ->components([
-                Select::make('prodi_id')
-                    ->relationship('prodi', 'nama_prodi')
-                    ->label('Program Studi')
-                    ->required()
-                    ->searchable()
-                    ->preload(),
                 Select::make('tahun_akademik_id')
                     ->relationship('tahunAkademik', 'tahun')
                     ->label('Tahun Akademik')
                     ->required()
                     ->preload()
-                    ->searchable(),
+                    ->searchable()
+                    ->unique(),
                 DatePicker::make('tanggal_dibuka')
                     ->label('Tanggal Dibuka'),
                 DatePicker::make('tanggal_ditutup')
                     ->label('Tanggal Ditutup'),
-                // Toggle::make('status_pendaftaran')
-                //     ->label('Status Pendaftaran : Dibuka/Ditutup')
-                //     ->required(),
             ]);
     }
 
@@ -70,8 +62,6 @@ class JadwalKknResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('prodi.nama_prodi')
-                    ->sortable(),
                 TextColumn::make('tahunAkademik.tahun')
                     ->sortable(),
                 TextColumn::make('tanggal_dibuka')
