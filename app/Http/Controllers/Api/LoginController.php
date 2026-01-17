@@ -52,6 +52,7 @@ class LoginController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'role' => $user->role,
+                'jumlah_sks' => $user->mahasiswa->jumlah_sks,
                 'fakultas' => [
                     'nama_fakultas' => $user->mahasiswa->prodi->fakultas->nama_fakultas ?? 'N/A'
                 ],
