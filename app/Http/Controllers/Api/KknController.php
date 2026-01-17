@@ -74,7 +74,7 @@ class KknController extends Controller
         if (!$jadwalKkn) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Tidak ada jadwal KKN yang sesuai untuk program studi ini'
+                'message' => 'Tidak ada jadwal KKN yang tersedia'
             ], 422);
         }
 

@@ -52,6 +52,9 @@ class LoginController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'role' => $user->role,
+                'fakultas' => [
+                    'nama_fakultas' => $user->mahasiswa->prodi->fakultas->nama_fakultas ?? 'N/A'
+                ],
                 'prodi' => [
                     'nama_prodi' => $user->mahasiswa->prodi->nama_prodi ?? 'N/A'
                 ],
@@ -59,7 +62,6 @@ class LoginController extends Controller
                     'jumlah_sks' => $user->mahasiswa->jumlah_sks ?? 'N/A',
                     'jenis_kelamin' => $user->mahasiswa->jenis_kelamin ?? 'N/A'
                 ],
-
             ],
             'token' => $token
         ], 200);
