@@ -57,17 +57,10 @@ class KknController extends Controller
             ], 422);
         }
 
-        // Mencari jadwal kkn yang sesuai dengan prodi
-        // $jadwalKkn = jadwalKkn::where('prodi_id', $mahasiswa->prodi_id)
-        //     ->where('tahun_akademik_id', $tahunAktif->id)
-        //     ->whereDate('tanggal_dibuka', '<=', now()) // Pendaftaran sudah dimulai
-        //     ->whereDate('tanggal_ditutup', '>=', now()) // Pendaftaran belum ditutup
-        //     ->first();
-
         // Mencari jadwal kkn yang sesuai tanpa prodi
         $jadwalKkn = jadwalKkn::where('tahun_akademik_id', $tahunAktif->id)
-            ->whereDate('tanggal_dibuka', '<=', now()) // Pendaftaran sudah dimulai
-            ->whereDate('tanggal_ditutup', '>=', now()) // Pendaftaran belum ditutup
+            ->whereDate('tanggal_dibuka', '<=', now())
+            ->whereDate('tanggal_ditutup', '>=', now())
             ->first();
 
         // jika tidak ada jadwal kkn yang sesuai
@@ -114,12 +107,6 @@ class KknController extends Controller
 
     public function getJadwalKkn(Request $request)
     {
-
-        // $jadwalKkn = JadwalKkn::with('prodi', 'tahunAkademik')
-        //     ->whereDate('tanggal_dibuka', '<=', now())
-        //     ->whereDate('tanggal_ditutup', '>=', now())
-        //     ->get();
-
         $jadwalKkn = JadwalKkn::with('tahunAkademik')
             ->whereDate('tanggal_dibuka', '<=', now())
             ->whereDate('tanggal_ditutup', '>=', now())
@@ -130,43 +117,4 @@ class KknController extends Controller
             'data' => $jadwalKkn
         ], 200);
     }
-
-    // public function validasiSyaratAdmin(Request $request)
-    // {
-    //     $tahunAktif = TahunAkademik::where('aktif', true)->first();
-    //     if (!$tahunAktif) {
-    //         return response()->json(['message' => 'Tidak ada tahun akademik yang aktif'], 422);
-    //     }
-
-    //     // 2. Dapatkan SEMUA prodi_id yang pendaftarannya sedang dibuka
-    //     $prodiIdsAktif = JadwalKkn::where('tahun_akademik_id', $tahunAktif->id)
-    //         // ->where('status_pendaftaran', true)
-    //         ->whereDate('tanggal_dibuka', '<=', now())
-    //         ->whereDate('tanggal_ditutup', '>=', now())
-    //         ->pluck('prodi_id') // Ambil hanya kolom prodi_id
-    //         ->unique(); // Pastikan unik
-
-    //     if ($prodiIdsAktif->isEmpty()) {
-    //         return response()->json(['message' => 'Tidak ada jadwal KKN yang dibuka saat ini.'], 404);
-    //     }
-
-    //     // 3. Tentukan SKS minimal
-    //     $sksMinimal = 110;
-
-    //     // 4. Cari SEMUA mahasiswa yang memenuhi KEDUA syarat:
-    //     //    a. SKS mereka cukup
-    //     //    b. prodi_id mereka ada di dalam daftar prodi yang aktif
-    //     $mahasiswaEligible = Mahasiswa::with('prodi') // 'with' agar efisien
-    //         ->where('jumlah_sks', '>=', $sksMinimal)
-    //         ->whereIn('prodi_id', $prodiIdsAktif) // Cek jika prodi_id ada di daftar
-    //         ->get();
-
-    //     // 5. Kembalikan datanya
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'message' => 'Berhasil mengambil ' . $mahasiswaEligible->count() . ' mahasiswa eligible.',
-    //         'data' => $mahasiswaEligible
-    //     ], 200);
-    // }
-
 }
