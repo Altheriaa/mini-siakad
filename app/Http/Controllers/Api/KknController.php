@@ -108,8 +108,8 @@ class KknController extends Controller
     public function getJadwalKkn(Request $request)
     {
         $jadwalKkn = JadwalKkn::with('tahunAkademik')
-            ->whereDate('tanggal_dibuka', '<=', now())
-            ->whereDate('tanggal_ditutup', '>=', now())
+            // ->whereDate('tanggal_dibuka', '<=', now())
+            // ->whereDate('tanggal_ditutup', '>=', now())
             ->get();
 
         return response()->json([
