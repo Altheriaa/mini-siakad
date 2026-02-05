@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\JadwalKkn;
 use App\Models\JenisKkn;
 use App\Models\Mahasiswa;
+use App\Models\MataKuliah;
 
 class KknController extends Controller
 {
@@ -25,17 +26,14 @@ class KknController extends Controller
     public function validasiSyarat(Request $request)
     {
 
-        // 0. Validasi input (terima ID dari KKN Payment)
         $request->validate([
             'jenis_kkn_id' => 'required|integer'
         ]);
 
         $jenisKknDipilih = $request->jenis_kkn_id;
 
-        // ambil yang sedang login berdasarkan token
         $user = $request->user();
 
-        // Ambil data akademik dari relasi 'mahasiswa'
         $mahasiswa = $user->mahasiswa;
         if (!$mahasiswa) {
             return response()->json([
@@ -44,7 +42,7 @@ class KknController extends Controller
             ], 403);
         }
 
-        // 1. validasi cek jadwal kkn
+        // validasi cek jadwal kkn
         // dapatkan tahun akademik yang sedang aktif
         $tahunAktif = TahunAkademik::where('aktif', true)
             ->orderBy('created_at', 'desc')
@@ -82,6 +80,30 @@ class KknController extends Controller
             ], 422);
         }
 
+        // Validasi Apakah Mahasiswa mengambil KKN di KRS
+        $mataKuliahKKn = MataKuliah::where('nama_mk', 'Kuliah kerja Nyata')
+            ->first();
+
+        if (!$mataKuliahKKn) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Mata kuliah KKN tidak ditemukan'
+            ], 422);
+        }
+
+        $sudahAdaKrs = $mahasiswa->mataKuliahs()
+            ->where('mata_kuliah_id', $mataKuliahKKn)
+            ->wherePivot('tahun_akademik_id', $tahunAktif->id)
+            ->exists();
+
+        if (!$sudahAdaKrs) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Anda Harus Mengambil Mata Kuliah Kuliah Kerja Nyata Terlebih Dahulu'
+            ], 422);
+        }
+
+        // Validasi jenis kkn aktif atau tidak?
         $jenisKkn = JenisKkn::where('id', $jenisKknDipilih)
             ->where('is_active', true)
             ->first();
@@ -93,6 +115,7 @@ class KknController extends Controller
             ], 422);
         }
 
+        // Response Akhir
         return response()->json([
             'status' => 'success',
             'is_eligible' => true,
@@ -108,8 +131,6 @@ class KknController extends Controller
     public function getJadwalKkn(Request $request)
     {
         $jadwalKkn = JadwalKkn::with('tahunAkademik')
-            // ->whereDate('tanggal_dibuka', '<=', now())
-            // ->whereDate('tanggal_ditutup', '>=', now())
             ->get();
 
         return response()->json([

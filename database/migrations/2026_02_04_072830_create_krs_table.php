@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('krs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mahasiswa_id')->constrained('mahasiswa')->onDelete('cascade');
-            $table->foreignId('tahun_akademik_id')->constrained('tahun_akademik')->onDelete('cascade');
-            $table->enum('status', ['belum_isi', 'sudah_isi', 'disetujui'])->default('belum_isi');
+            $table->foreignId('mahasiswa_id')->constrained('mahasiswa')->cascadeOnDelete();
+            $table->foreignId('mata_kuliah_id')->constrained('mata_kuliah')->cascadeOnDelete();
+            $table->foreignId('tahun_akademik_id')->constrained('tahun_akademik')->cascadeOnDelete();
             $table->timestamps();
         });
     }

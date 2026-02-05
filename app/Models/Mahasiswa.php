@@ -29,8 +29,11 @@ class Mahasiswa extends Model
         return $this->belongsTo(Prodi::class, 'prodi_id');
     }
 
-    public function krss()
+    public function mataKuliahs()
     {
-        return $this->hasMany(Krs::class, 'mahasiswa_id');
+        return $this->belongsToMany(MataKuliah::class, 'krs', 'mahasiswa_id', 'mata_kuliah_id')
+            ->using(Krs::class)
+            ->withPivot(['tahun_akademik_id'])
+            ->withTimestamps();
     }
 }

@@ -2,18 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 
-class Krs extends Model
+class Krs extends Pivot
 {
     protected $table = 'krs';
 
     protected $fillable = [
         'mahasiswa_id',
-        'tahun_akademik_id',
-        'status'
+        'mata_kuliah_id',
+        'tahun_akademik_id'
     ];
+
+    public function mataKuliah()
+    {
+        return $this->belongsTo(MataKuliah::class, 'mata_kuliah_id');
+    }
 
     public function mahasiswa()
     {

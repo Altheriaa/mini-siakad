@@ -16,7 +16,7 @@ class TahunAkademik extends Model
         'aktif',
     ];
 
-    public function krss()
+    public function krs()
     {
         return $this->hasMany(Krs::class, 'tahun_akademik_id');
     }
