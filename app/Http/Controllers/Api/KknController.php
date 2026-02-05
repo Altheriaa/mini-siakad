@@ -92,7 +92,7 @@ class KknController extends Controller
         }
 
         $sudahAdaKrs = $mahasiswa->mataKuliahs()
-            ->where('mata_kuliah_id', $mataKuliahKKn)
+            ->where('mata_kuliah_id', $mataKuliahKKn->id)
             ->wherePivot('tahun_akademik_id', $tahunAktif->id)
             ->exists();
 
