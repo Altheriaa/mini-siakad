@@ -55,7 +55,7 @@ class KknController extends Controller
             ], 422);
         }
 
-        // Mencari jadwal kkn yang sesuai tanpa prodi
+        // Mencari jadwal kkn yang dibuka
         $jadwalKkn = jadwalKkn::where('tahun_akademik_id', $tahunAktif->id)
             ->whereDate('tanggal_dibuka', '<=', now())
             ->whereDate('tanggal_ditutup', '>=', now())
@@ -81,7 +81,7 @@ class KknController extends Controller
         }
 
         // Validasi Apakah Mahasiswa mengambil KKN di KRS
-        $mataKuliahKKn = MataKuliah::where('nama_mk', 'Kuliah kerja Nyata')
+        $mataKuliahKKn = MataKuliah::where('nama_mk', 'Kuliah Kerja Nyata')
             ->first();
 
         if (!$mataKuliahKKn) {

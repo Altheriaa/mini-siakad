@@ -16,7 +16,7 @@
         <div class="max-w-full mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-blue-600">MINI SIAKAD</h1>
             <div class="flex items-center space-x-6">
-                <span class="text-gray-700">Selamat datang, <strong>{{ Auth::user()->name }}</strong></span>
+                <span class="text-gray-700">Selamat datang, <strong>{{ Auth::user()->name ?? '-' }}</strong></span>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
@@ -33,7 +33,7 @@
             <div class="p-6">
                 <div class="bg-blue-50 p-4 rounded-lg mb-6">
                     <p class="text-sm text-gray-600">NIM</p>
-                    <p class="text-xl font-bold text-blue-600">{{ Auth::user()->nim }}</p>
+                    <p class="text-xl font-bold text-blue-600">{{ Auth::user()->nim ?? '-' }}</p>
                 </div>
 
                 <nav class="space-y-2">
