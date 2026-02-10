@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class MahasiswaController extends Controller
 {
@@ -39,5 +40,19 @@ class MahasiswaController extends Controller
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
         return response()->json($mahasiswa, 200);
+    }
+
+    public function syncMahasiswa()
+    { 
+
+        $users = User::with('mahasiswa.prodi.fakultas')
+                ->where('role', 'mahasiswa')
+                ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Sync semua mahasiswa berhasil.',
+            'users' => $users,
+        ], 200);
     }
 }

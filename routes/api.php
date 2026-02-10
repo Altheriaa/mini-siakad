@@ -15,8 +15,6 @@ Route::get('/user', function (Request $request) {
 // data login
 Route::post('/auth/login', [LoginController::class, 'apiLogin']);
 
-// data mahasiswa
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 
@@ -30,6 +28,7 @@ Route::middleware('check.system.key')->group(function () {
     Route::get('/kkn/jenis', [KknController::class, 'getJenisKkn']);
     Route::get('/kkn/syarat/admin', [KknController::class, 'validasiSyaratAdmin']);
     Route::get('/jadwal-kkn', [KknController::class, 'getJadwalKkn']);
+    Route::get('/sync-mahasiswa', [MahasiswaController::class, 'syncMahasiswa']);
 });
 
 // Route::get('/check-key', function () {

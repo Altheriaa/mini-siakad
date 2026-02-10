@@ -37,7 +37,7 @@ class MahasiswaImport implements ToModel, WithHeadingRow, WithCalculatedFormulas
                 ],
                 [
                     'name' => $row['nama'],
-                    'email' => strtolower($row['nama']) . $row['nim'] .'@abulyatama.ac.id',
+                    'email' => strtolower(str_replace(' ', '', $row['nama'])) . $row['nim'] . '@abulyatama.ac.id',
                     'password' => Hash::make('123'),
                     'role' => 'mahasiswa',
                 ]
