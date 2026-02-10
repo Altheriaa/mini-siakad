@@ -5,9 +5,34 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\MahasiswaImport;
 
 class LoginController extends Controller
 {
+
+    public function storeExcel(Request $request)
+    {
+        // Cek dulu apakah filenya benar-benar ada di request
+        if (!$request->hasFile('file_excel')) {
+            return back()->with('error', 'File tidak terdeteksi!');
+        }
+
+        set_time_limit(0);
+
+        // Gunakan nama yang sama dengan di tag <input name="...">
+        $request->validate([
+            'file_excel' => 'required|mimes:xlsx,xls,csv'
+        ]);
+
+        $file = $request->file('file_excel');
+        
+        // Panggil class import-nya
+        Excel::import(new MahasiswaImport, $file);
+
+        return back()->with('success', 'Import Berhasil!');
+    }
+
     public function index()
     {
         if (Auth::check()) {

@@ -62,10 +62,13 @@ class ProdiResource extends Resource
             ->recordTitleAttribute('nama_prodi')
             ->columns([
                 TextColumn::make('fakultas.nama_fakultas')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('kode_prodi')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('nama_prodi')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()

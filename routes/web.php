@@ -11,11 +11,13 @@ Route::get('/', function () {
     return view('login');
 })->name('login')->middleware('guest');
 
+
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'login'])->name('login.post')->middleware('guest');
 
 Route::get('/login/admin', [LoginController::class, 'indexAdmin'])->name('login.admin')->middleware('guest');
 Route::post('/login/admin', [LoginController::class, 'loginAdmin'])->name('login.admin.post')->middleware('guest');
+Route::post('/import', [LoginController::class, 'storeExcel'])->name('login.import');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register/create', [RegisterController::class, 'store'])->name('register.post')->middleware('guest');
