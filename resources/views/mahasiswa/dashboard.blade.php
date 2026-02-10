@@ -16,7 +16,7 @@
         <div class="max-w-full mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-blue-600">MINI SIAKAD</h1>
             <div class="flex items-center space-x-6">
-                <span class="text-gray-700">Selamat datang, <strong>{{ Auth::user()->name ?? '-' }}</strong></span>
+                <span class="text-gray-700">Selamat datang, <strong></strong></span>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
@@ -33,7 +33,7 @@
             <div class="p-6">
                 <div class="bg-blue-50 p-4 rounded-lg mb-6">
                     <p class="text-sm text-gray-600">NIM</p>
-                    <p class="text-xl font-bold text-blue-600">{{ Auth::user()->nim ?? '-' }}</p>
+                    <p class="text-xl font-bold text-blue-600"></p>
                 </div>
 
                 <nav class="space-y-2">
@@ -59,11 +59,11 @@
                         <div>
                             <p class="text-gray-600 text-sm">Prodi</p>
                             <p class="text-3xl font-bold text-blue-600">
-                                @if($userprodi)
-                                    {{ optional($userprodi->mahasiswa->prodi)->nama_prodi ?? '-' }}
+                                {{-- @if($userprodi)
+                                {{ optional($userprodi->mahasiswa->prodi)->nama_prodi ?? '-' }}
                                 @else
-                                    -
-                                @endif
+                                -
+                                @endif --}}
                             </p>
                         </div>
                         <div class="bg-blue-100 p-3 rounded-full">
@@ -77,11 +77,11 @@
                         <div>
                             <p class="text-gray-600 text-sm">SKS Lulus</p>
                             <p class="text-3xl font-bold text-green-600 mt-3">
-                                @if($user)
-                                    {{ optional($user->mahasiswa)->jumlah_sks ?? '0' }}
+                                {{-- @if($user)
+                                {{ optional($user->mahasiswa)->jumlah_sks ?? '0' }}
                                 @else
-                                    -
-                                @endif
+                                -
+                                @endif --}}
                             </p>
                         </div>
                         <div class="bg-green-100 p-3 rounded-full">
@@ -95,11 +95,11 @@
                         <div>
                             <p class="text-gray-600 text-sm">Jenis Kelamin</p>
                             <p class="text-3xl font-bold text-yellow-600 mt-3">
-                                @if($user)
-                                    {{ optional($user->mahasiswa)->jenis_kelamin }}
+                                {{-- @if($user)
+                                {{ optional($user->mahasiswa)->jenis_kelamin }}
                                 @else
-                                    -
-                                @endif
+                                -
+                                @endif --}}
                             </p>
                         </div>
                         <div class="bg-yellow-100 p-3 rounded-full">
@@ -113,11 +113,11 @@
                         <div>
                             <p class="text-gray-600 text-sm">Status Mahasiswa</p>
                             <p class="text-xl font-bold text-red-600 mt-3">
-                                @if($user)
-                                    {{ strtoupper(optional($user->mahasiswa)->status ?? '-') }}
+                                {{-- @if($user)
+                                {{ strtoupper(optional($user->mahasiswa)->status ?? '-') }}
                                 @else
-                                    -
-                                @endif
+                                -
+                                @endif --}}
                             </p>
                         </div>
                         <div class="bg-red-100 p-3 rounded-full">
