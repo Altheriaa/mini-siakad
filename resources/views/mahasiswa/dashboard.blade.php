@@ -59,7 +59,11 @@
                         <div>
                             <p class="text-gray-600 text-sm">Prodi</p>
                             <p class="text-3xl font-bold text-blue-600">
-                                {{ optional($userprodi->mahasiswa->prodi)->nama_prodi ?? '-' }}
+                                @if($userprodi)
+                                    {{ optional($userprodi->mahasiswa->prodi)->nama_prodi ?? '-' }}
+                                @else
+                                    -
+                                @endif
                             </p>
                         </div>
                         <div class="bg-blue-100 p-3 rounded-full">
@@ -73,7 +77,11 @@
                         <div>
                             <p class="text-gray-600 text-sm">SKS Lulus</p>
                             <p class="text-3xl font-bold text-green-600 mt-3">
-                                {{ optional($user->mahasiswa)->jumlah_sks ?? '0' }}
+                                @if($user)
+                                    {{ optional($user->mahasiswa)->jumlah_sks ?? '0' }}
+                                @else
+                                    -
+                                @endif
                             </p>
                         </div>
                         <div class="bg-green-100 p-3 rounded-full">
@@ -87,7 +95,11 @@
                         <div>
                             <p class="text-gray-600 text-sm">Jenis Kelamin</p>
                             <p class="text-3xl font-bold text-yellow-600 mt-3">
-                                {{ optional($user->mahasiswa)->jenis_kelamin }}
+                                @if($user)
+                                    {{ optional($user->mahasiswa)->jenis_kelamin }}
+                                @else
+                                    -
+                                @endif
                             </p>
                         </div>
                         <div class="bg-yellow-100 p-3 rounded-full">
@@ -101,7 +113,11 @@
                         <div>
                             <p class="text-gray-600 text-sm">Status Mahasiswa</p>
                             <p class="text-xl font-bold text-red-600 mt-3">
-                                {{ strtoupper(optional($user->mahasiswa)->status ?? '-') }}
+                                @if($user)
+                                    {{ strtoupper(optional($user->mahasiswa)->status ?? '-') }}
+                                @else
+                                    -
+                                @endif
                             </p>
                         </div>
                         <div class="bg-red-100 p-3 rounded-full">
