@@ -6,14 +6,14 @@
         <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
             <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center">Login Admin</h2>
             <p class="text-gray-600 text-center mb-8">Masuk ke Sistem Mini Siakad</p>
-            <form action="/import" method="POST" enctype="multipart/form-data">
+            {{-- <form action="/import" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label class="form-label">Pilih File Excel (.xlsx)</label>
                     <input type="file" name="file_excel" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Mulai Import Data</button>
-            </form>
+            </form> --}}
 
             <form class="space-y-5" action="{{ route('login.admin.post') }}" method="POST">
                 <!-- CSRF Token -->
@@ -23,8 +23,8 @@
                 <div>
                     <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
                     <input type="email" id="email" name="email" placeholder="Masukkan Email" class=" w-full px-4 py-2 border
-                                    border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1
-                                    focus:ring-blue-500" required>
+                                        border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1
+                                        focus:ring-blue-500" required>
                 </div>
 
                 <!-- Password -->
