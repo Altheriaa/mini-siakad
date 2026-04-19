@@ -16,8 +16,8 @@ Route::get('/user', function (Request $request) {
 Route::post('/auth/login', [LoginController::class, 'apiLogin']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    
     Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
-
     // syarat kkn 
     Route::post('/kkn/syarat', [KknController::class, 'validasiSyarat']);
 });

@@ -51,7 +51,7 @@ class KknController extends Controller
         if (!$tahunAktif) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Tidak ada tahum akademik yang aktif'
+                'message' => 'Tidak ada tahun akademik yang aktif'
             ], 422);
         }
 
@@ -76,7 +76,7 @@ class KknController extends Controller
         if ($sksMahasiswa < $sksMinimal) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Jumlah SKS tidak mencukupi. Minimal SKS untuk mendaftar KKN adalah ' . $sksMinimal . ' SKS.'
+                'message' => 'SKS atau KRS anda tidak memenuhi syarat'
             ], 422);
         }
 
@@ -99,7 +99,7 @@ class KknController extends Controller
         if (!$sudahAdaKrs) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Anda Harus Mengambil Mata Kuliah Kuliah Kerja Nyata Terlebih Dahulu'
+                'message' => 'SKS atau KRS anda tidak memenuhi syarat'
             ], 422);
         }
 
@@ -128,7 +128,7 @@ class KknController extends Controller
         ], 200);
     }
 
-    public function getJadwalKkn(Request $request)
+    public function getJadwalKkn()
     {
         $jadwalKkn = JadwalKkn::with('tahunAkademik')
             ->get();
