@@ -8,8 +8,8 @@ use App\Http\Middleware\isMahasiswa;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('login');
-})->name('login')->middleware('guest');
+    return redirect()->route('login');
+});
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
